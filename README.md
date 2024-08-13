@@ -14,3 +14,8 @@
   -  GraphQLのフロント・バックエンドライブラリ
      -  使うと簡単にGraphQLを扱える
   -  公式：https://www.apollographql.com/docs/
+
+# ハンズオン
+- apollov2を使っている（最新はv4）
+  - v4にupgradeするのを発展としてやってもいいかも
+- スキーマを定義する＝データ構造を定義する
