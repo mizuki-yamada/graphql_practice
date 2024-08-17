@@ -9,6 +9,15 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  //  urlはmigration操作によって作られる
+  url      = "file:./dev.db"
+}
+
+// DBの属性（データ構造）を定義する
+model Link {
+  id Int @id @default(autoincrement()) //投稿（post）ごとに自動で+1して生成するという設定
+  createdAt DateTime @default(now())
+	description String
+	url String
 }

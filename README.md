@@ -32,3 +32,6 @@
       -  SQLを知らなくても大丈夫！
    -  https://www.prisma.io/
    -  https://qiita.com/am_765/items/5e42bd5f87b296f61fbc
+-  `npx prisma init`
+-  `npx prisma migrate dev`: schema.prismaを更新するたびに実行する必要あり
+   -  データモデルの定義が変わるので
