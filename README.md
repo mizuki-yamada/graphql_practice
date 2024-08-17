@@ -25,3 +25,13 @@
 - QueryとMutation
   -  Query：取得（SELECT／GET）
   -  Mutation:読み書き（DELETE, POST など）
+-  Prismaを使ったデータベース操作
+   -  Prisma：次世代オープンソースORM
+   -  ORM： Object Relational Mapping
+      -  すごく簡単にいうと、JavaScriptの構文を使ってデータベースを操作できるようにするもの
+      -  SQLを知らなくても大丈夫！
+   -  https://www.prisma.io/
+   -  https://qiita.com/am_765/items/5e42bd5f87b296f61fbc
+-  `npx prisma init`
+-  `npx prisma migrate dev`: schema.prismaを更新するたびに実行する必要あり
+   -  データモデルの定義が変わるので
