@@ -22,3 +22,6 @@
 - リゾルバ：定義したスキーマに対して、実際の値を入れる（解決する）
   - スキーマの`Query`とリゾルバの`Query`、スキーマで定義したフィールドにリゾルバでも一致させる必要がある
   - Mutation, Subscriptionもある
+- QueryとMutation
+  -  Query：取得（SELECT／GET）
+  -  Mutation:読み書き（DELETE, POST など）
