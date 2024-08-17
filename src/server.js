@@ -1,4 +1,6 @@
-const {ApolloServer, gql} = require("apollo-server")
+const { ApolloServer, gql } = require("apollo-server")
+const fs = require("fs")
+const path = require("path")
 
 // ref https://www.apollographql.com/docs/apollo-server/v2
 
@@ -10,24 +12,6 @@ const links = [
 		url: "test"
 	}
 ]
-
-// define schema
-const typeDefs = gql`
-	type Query {
-		info: String!
-		feed : [Link]!
-	}
-
-	type Mutation {
-		post(url: String!, description: String!): Link!
-	}
-
-	type Link {
-		id: ID!
-		description: String!
-		url: String!
-	}
-`
 
 // resolver
 const resolvers = {
@@ -53,6 +37,9 @@ const resolvers = {
 	}
   };
 
-  const server = new ApolloServer({typeDefs,resolvers})
+const server = new ApolloServer({
+	typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf-8"),
+	resolvers
+})
 
   server.listen().then(({url})=>console.log(`start server @ ${url}`))
