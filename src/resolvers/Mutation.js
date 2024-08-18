@@ -22,3 +22,23 @@ async function singup(parent, args, context) {
 	// schema.graphqlで定義した戻り値の型を合うデータを返す
 	return {token,user}
 }
+
+async function login(parent, args, context) {
+	const user = await context.prisma.user.findUnique({
+		where: {email:args.email}
+	})
+	if (!user) {
+		throw new Error ("user does not exist")
+	}
+
+	// passwordの比較
+	const valid = await bcrypt.compare(args.password, user.password)
+	if (!valid) {
+		throw new Error ("invalid password")
+	}
+
+	// userが存在していて、パスワードも正しいので、ユーザ情報を暗号化
+	const token = jwt.sign({ userId: user.id }, APP_SECRET)
+	// schema.graphqlで定義した戻り値の型を合うデータを返す
+	return {token,user}
+}
