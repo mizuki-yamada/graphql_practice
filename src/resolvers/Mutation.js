@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 const APP_SECRET = require("../utils")
 
 // ここでのargsはschema.graphqlで設定したsignupが受け取る3つの引数
-async function singup(parent, args, context) {
+async function signup(parent, args, context) {
 	// set password
 	const password = await bcrypt.hash(args.password, 10)
 
@@ -57,7 +57,7 @@ async function post(parent, args, context) {
 }
 
 module.exports = {
-	singup,
+	signup,
 	login,
 	post,
 }
