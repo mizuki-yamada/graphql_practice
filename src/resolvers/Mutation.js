@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
 // 署名するための鍵、サーバ側のみが持つ。第3者がtokenを拾ってもこのAPP_SECRETを知らないと複合はできない。
-const APP_SECRET = "Graphql"
+const APP_SECRET = require("../utils")
 
 // ここでのargsはschema.graphqlで設定したsignupが受け取る3つの引数
 async function singup(parent, args, context) {
@@ -41,4 +41,14 @@ async function login(parent, args, context) {
 	const token = jwt.sign({ userId: user.id }, APP_SECRET)
 	// schema.graphqlで定義した戻り値の型を合うデータを返す
 	return {token,user}
+}
+
+// newsを投稿するresolver
+async function post(parent, args, context) {
+	return await context.prisma.link.create({
+		data: {
+			url: args.url,
+			description: args.description,
+		}
+	})
 }
