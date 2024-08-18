@@ -15,9 +15,21 @@ datasource db {
 }
 
 // DBの属性（データ構造）を定義する
+// Mutation実行のたびに作られるデータの型
 model Link {
   id Int @id @default(autoincrement()) //投稿（post）ごとに自動で+1して生成するという設定
   createdAt DateTime @default(now())
 	description String
 	url String
+  postedBy User? @relation(fields: [postedById], references: [id])
+  postedById Int?
+}
+
+// userモデルの定義
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique // emailの重複はだめなので
+  password String
+  links Link[]
 }

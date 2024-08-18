@@ -35,3 +35,6 @@
 -  `npx prisma init`
 -  `npx prisma migrate dev`: schema.prismaを更新するたびに実行する必要あり
    -  データモデルの定義が変わるので
+-  Relations
+   -  モデル同士に関係がある場合、schema内でその関係を明示的に定義する必要がある
+   -  https://www.prisma.io/docs/orm/prisma-schema/data-model/relations
