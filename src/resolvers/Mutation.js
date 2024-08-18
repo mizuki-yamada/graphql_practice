@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
 // 署名するための鍵、サーバ側のみが持つ。第3者がtokenを拾ってもこのAPP_SECRETを知らないと複合はできない。
-const APP_SECRET = require("../utils")
+const { APP_SECRET } = require("../utils")
 
 // ここでのargsはschema.graphqlで設定したsignupが受け取る3つの引数
 async function signup(parent, args, context) {
