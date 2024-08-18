@@ -3,6 +3,12 @@ const fs = require("fs")
 const path = require("path")
 const { getUserId } = require("./utils")
 
+// resolvers
+const Query =require("./resolvers/Query")
+const Mutation =require("./resolvers/Mutation")
+const Link =require("./resolvers/Link")
+const User =require("./resolvers/User")
+
 const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
 
@@ -10,26 +16,10 @@ const prisma = new PrismaClient()
 
 // resolver
 const resolvers = {
-	// 返す値を定義する（playgroundで値を確認できる）
-	Query: {
-	  info: () => "HackerNewsクローン",
-	  feed: async(parent, args, context) => {
-		return context.prisma.link.findMany()
-	  }
-	},
-
-	Mutation: {
-		// argsはschemaで定義したpostが受け取る引数
-		post: (parent, args, context) => {
-			const newLink = context.prisma.link.create({
-				data: {
-					url: args.url,
-					description: args.description,
-				}
-			})
-			return newLink
-	  }
-	}
+	Query,
+	Mutation,
+	Link,
+	User
   };
 
 const server = new ApolloServer({
