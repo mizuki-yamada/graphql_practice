@@ -33,4 +33,4 @@ function getUserId(req, authToken) {
 	throw new Error ("not authorized")
 }
 
-module.exports = { APP_SECRET }
+module.exports = { APP_SECRET, getUserId }

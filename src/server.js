@@ -1,6 +1,7 @@
 const { ApolloServer} = require("apollo-server")
 const fs = require("fs")
 const path = require("path")
+const { getUserId } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
@@ -35,8 +36,13 @@ const server = new ApolloServer({
 	typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf-8"),
 	resolvers,
 	// resolverの中であればprismaをどこでも使えるように、contextを設定
-	context: {
-		prisma
+	context: ({ req }) => {
+		return {
+			...req,
+			// 現存するreqにデータを追加する形になるので、スプレッド構文になる
+			prisma,
+			userId: req && req.headers.authorization ? getUserId(req) : null
+		}
 	}
 })
 
