@@ -45,10 +45,19 @@ async function login(parent, args, context) {
 
 // newsを投稿するresolver
 async function post(parent, args, context) {
+	const {userId} = context
 	return await context.prisma.link.create({
 		data: {
 			url: args.url,
 			description: args.description,
+			// userモデルとの関係を示すためにconnectを使う
+			postedBy: {connect: {id: userId}}
 		}
 	})
+}
+
+module.exports = {
+	singup,
+	login,
+	post,
 }
